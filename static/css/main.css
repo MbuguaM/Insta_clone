@@ -1,0 +1,30 @@
+body{
+    margin-top:0px;
+}
+nav{
+
+   margin-top:20px;
+}
+form{
+    padding-right:40px;
+}
+
+p{
+    color:green;
+}
+hr{
+  margin-top:0px;
+}
+a.icon {
+    padding-right:15px;
+}
+
+@font-face {
+    font-family: "My Custom Font";
+    src: url(Billabong.ttf) format("truetype");
+}
+
+a.customfont { 
+    font-family: "My Custom Font", Verdana, Tahoma;
+    font-size: 35px;
+}
