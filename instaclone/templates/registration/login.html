@@ -1,0 +1,26 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+  {{ block.super }}
+  <div class="wrapper">
+    <div class="well signup text-center">
+      <h2 class="logo">Iclone</h2>
+      <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+
+          <br>
+          {{ field }}
+          {% for error in field.errors %}
+            <p class="alert alert-danger">{{ error }}</p>
+          {% endfor %}
+
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </form>
+    </div>
+    <div class="well account-w text-center">Dont't have an account?
+      <a href="{% url 'signup' %}">Sign up</a>
+    </div>
+  </div>
+{% endblock %}

@@ -19,7 +19,7 @@ class User_profTestClass(TestCase):
         user2 = User_prof(username = "mbugua", bio = "the world revolves" ) 
         user2.save()
 
-        _all =User_prof.objects.all()
+        _all = User_prof.objects.all()
         self.assertEqual(len(_all),2)
 
     def test_delete_funtction(self):

@@ -1,0 +1,10 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="alert alert-success success-activation">
+    <img src="{% static 'images/checked.png' %}" class="img-responsive" alt="Image">
+    <p>Please confirm your email address to complete the registration.</p>
+  </div>
+{% endblock %}

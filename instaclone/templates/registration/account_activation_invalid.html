@@ -1,0 +1,14 @@
+{% extends 'registration/base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <div class="alert alert-danger invalid-activation">
+    <img src="{% static 'images/danger-sing.png' %}" class="img-responsive" alt="Image">
+    <h2>
+      The confirmation link was invalid.
+
+    </h2>
+
+  </div>
+{% endblock %}
