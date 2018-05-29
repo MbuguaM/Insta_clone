@@ -5,8 +5,9 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
-from .forms import SignUpForm
+from .forms import SignUpForm,ImageForm
 from .tokens import account_activation_token
+from .models import User_prof, Comments, Image
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 # decorators 
@@ -64,7 +65,13 @@ def activate(request, uidb64, token):
 @login_required
 def home(request):
     """ displays the landing page """
-    return render(request,'all_templates/landing.html')
+    current_user = request.user
+    all_images = Image.objects.all()
+    # return_list = []
+    # for image in all_images:
+    #     return_list.append((image, image.image_likes.filter(profile_owner=request.user)))
+
+    return render(request,'all_templates/landing.html',{'images':all_images})
 
 @login_required
 def explore(request):
@@ -81,6 +88,23 @@ def profile(request):
     """ displays the landing page """
     return render(request,'all_templates/profile.html')
 
+@login_required
+def post(request):
+    current_user = request.user
+    print(current_user)
+    prof = User_prof.objects.get(user = current_user)
+    print(prof)
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.prof = prof
+            post.save()
+        return redirect(home)
+    else:
+        form = ImageForm()
+
+    return render(request, 'all_templates/post.html', {"form": form})
 
 
 

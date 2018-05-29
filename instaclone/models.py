@@ -5,6 +5,11 @@ from django.db.models.signals import post_save
 from django.utils import timezone
 
 # Create your models here.
+# choices for the image category section 
+CATEGORY_CHOICES  = (
+    ('PRIVATE', 'private'),
+    ('PUBLIC', 'public')
+)
 # user model
 class User_prof(models.Model):
     """ model that hold infomation on the user """
@@ -76,7 +81,7 @@ class Image(models.Model):
     likes = models.ManyToManyField(User_prof,related_name='who_liked', blank= True)
     comments = models.ForeignKey(Comments, null = True)
     uploaded_at = models.DateField( default = timezone.now)
-
+    category  = models.CharField(max_length = 30, choices = CATEGORY_CHOICES, default = 'PRIVATE')
     # methods 
     def save_image(self):
         """ saves the image and its details """
