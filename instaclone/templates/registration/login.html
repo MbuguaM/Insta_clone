@@ -16,7 +16,10 @@
           {% endfor %}
 
         {% endfor %}
-        <button type="submit" class="btn btn-primary">Log in</button>
+        <br>
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" value="{{next}}" />
+
       </form>
     </div>
     <div class="well account-w text-center">Dont't have an account?

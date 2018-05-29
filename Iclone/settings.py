@@ -130,6 +130,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+db_from_env = dj_database_url.config(conn_max_age=500)
+LOGIN_REDIRECT_URL = ('/')
+LOGIN_URL = ('/login')
 
 
 

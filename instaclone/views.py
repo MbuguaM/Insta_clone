@@ -13,10 +13,6 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-@login_required(login_url ='/login')
-def home(request):
-    """ displays the landing page """
-    return render(request,'all_templates/landing.html')
 
 
 def signup(request):
@@ -64,3 +60,27 @@ def activate(request, uidb64, token):
         return redirect('home')
     else:
         return render(request, 'registration/account_activation_invalid.html')
+      
+@login_required
+def home(request):
+    """ displays the landing page """
+    return render(request,'all_templates/landing.html')
+
+@login_required
+def explore(request):
+    """ displays the landing page """
+    return render(request,'all_templates/explore.html')
+
+@login_required
+def favourites(request):
+    """ displays the landing page """
+    return render(request,'all_templates/favourites.html')
+
+@login_required
+def profile(request):
+    """ displays the landing page """
+    return render(request,'all_templates/profile.html')
+
+
+
+

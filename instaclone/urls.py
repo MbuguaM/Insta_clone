@@ -5,5 +5,11 @@ from . import views
 
 
 urlpatterns = [
-  url(r'^$',views.home, name ="home")
+  #landin page 
+  url(r'^$',views.home, name ="home"),
+  # navigating though 
+  url(r'^explore/$',views.explore,name = "explore"),
+  url(r'^favourites/$', views.favourites, name = "favourites"),
+  url(r'^profile/$', views.profile,name = "profile" )
+  
 ]
