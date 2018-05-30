@@ -86,6 +86,7 @@ def favourites(request):
 @login_required
 def profile(request):
     """ displays the landing page """
+    #searching for users inpu
     return render(request,'all_templates/profile.html')
 
 @login_required
@@ -106,5 +107,24 @@ def post(request):
 
     return render(request, 'all_templates/post.html', {"form": form})
 
+@login_required
+def profile(request):
+    """ rendering images by profile owner """
+    current_user = request.user
+    prof_details = User_prof.objects.filter(username = current_user.id).all()
+    user_images  = Image.objects.filter(username = current_user).all()
 
+    return render(request, 'all_templates/profile.html', {'prof_data': prof_details,'user_images':user_images})
 
+@login_required
+def explore(request):
+    """ rendering discover images """
+    discover_images = Image.objects.filter(category = 'public').all()
+    return render(request, 'all_templates/explore.html',{'discover_images':discover_images})
+
+@login_required
+def search(request,username):
+    """ rendering search images """
+    if re
+    images = Image.objects.filter(username = user)
+    return render(request, "all_templates/search.html",{'images':images})

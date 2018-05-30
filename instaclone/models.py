@@ -30,21 +30,27 @@ class User_prof(models.Model):
     def delete_prof(self):
         """ deletes user instance """
         self.delete()
-    # class methods
+
+    def delete(self):
+        """ redifining the mail_confirm field in the user_prof"""
+        self.mail_confirm = False
+        self.save()
 
     @classmethod
-    def update_user(cls,id,name,_bio):
+    def update_user(cls,id,_bio):
         """ updates user infomation by username """
-        user = cls.objects.get(pk = id)
-        user.username = name
-        user.bio = _bio
-
-    
+        user = cls.objects.filter(user = id).update(bio = _bio)
+        
     @classmethod
     def find_profile(cls,name):
         "allows retrieval of user profile by name"
-        user = cls.objects.filter(username = name)
+        user = cls.objects.get(username = name)
         return user
+
+    @classmethod
+    def update_profile_photo(cls, user_id, value):
+        """ updating the user photo"""
+        cls.objects.filter(user=user_id).update(profile_photo=value)
 
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
@@ -59,10 +65,11 @@ class Comments(models.Model):
     user = models.ForeignKey(User_prof, null = True)
 
     #methods
-    def save(self):
+    def save_comment(self):
         "save the comment"
         self.save()
-    def delete(self):
+
+    def delete_comment(self):
         "deletes a comment"
         self.delete()
     
@@ -85,18 +92,28 @@ class Image(models.Model):
     # methods 
     def save_image(self):
         """ saves the image and its details """
-        pass
+        self.save()
     
     def delete_image(self):
         """ deletes image from the database """
-        pass
+        self.delete()
 
 
     @classmethod
-    def update_caption(cls):
+    def update_caption(cls, image_id, caption):
         """ allows user to change image caption"""
-        pass
+        cls.objects.filter(id=image_id).update(image_caption=caption)
+    
     @classmethod
-    def query_by_ids(cls):
-        """ retrieves data by the image id """
-        pass
+    def query_by_id(cls, _id):
+        """ retrieves image by the image id """
+        image = cls.objects.get(id =_id)
+        return image 
+    
+    @classmethod 
+    def get_imge_by_pofile(cls, User_prof_id):
+        """ retirevin the image by user profile """
+        images = cls.objects.filter(prof= User_prof_id).all()
+        return images
+
+

@@ -6,6 +6,7 @@ class User_profTestClass(TestCase):
     """ test that the use_prof is working """
     def setUp(self):
         """setting an instance of the class """
+        
         self.new_user = User_prof(username = 'munga',bio = 'funny thing to say')
 
 
@@ -22,7 +23,7 @@ class User_profTestClass(TestCase):
         _all = User_prof.objects.all()
         self.assertEqual(len(_all),2)
 
-    def test_delete_funtction(self):
+    def test_delete_function(self):
         """ testing the delete function """ 
         self.new_user.save_prof()
         user2 = User_prof(username = "mbugua", bio = "the world revolves" ) 
@@ -35,4 +36,9 @@ class User_profTestClass(TestCase):
     # def test_update(self):
     #     """ testing for the update of user """
     #     User_prof = 
-        
+
+# class ImageTestCase(TestCase):
+#     """ testing the image model """
+#     def setUp(self):
+#         """ setting up the image for testing """
+#         self.new_Image = Image()
