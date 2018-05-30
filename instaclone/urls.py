@@ -12,7 +12,7 @@ urlpatterns = [
   url(r'^favourites/$', views.favourites, name = "favourites"),
   url(r'^profile/$', views.profile,name = "profile" ),
   url(r'^post/', views.post, name='post'),
-  url(r'^search/(?P<username>\d+)/$', views.search, name = "search")
+  url(r'^search/(?P<name>\[\w.@+-]+)/$', views.search, name = "search")
   
 ]
 if settings.DEBUG:

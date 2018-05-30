@@ -123,8 +123,17 @@ def explore(request):
     return render(request, 'all_templates/explore.html',{'discover_images':discover_images})
 
 @login_required
-def search(request,username):
+def search(request,name):
     """ rendering search images """
-    if re
-    images = Image.objects.filter(username = user)
-    return render(request, "all_templates/search.html",{'images':images})
+    if 'name' in request.Get and request.Get['name']:
+        search_term = request.GET.get("name")
+        try:
+            images = Image.object.filter(image_name = search_term).all()
+            return render(request, "all_templates/search.html",{'images':images})
+        except:
+            message ='Image for search term not found'
+            return render(request,"all_templates/search.html",{'message':message})
+
+    else: 
+        message = 'please enter a search term '
+        retrun render(request,"all_templates/search.html",{'message': message})
